@@ -36,25 +36,28 @@ def neighbor(matrix, i, j, n):
 # Q:此种演变规则下，是不是元胞数量 or 领域层数越多，演变出的图形种类就越多?
 
 
-def update(frames, img, matrix, n):
+def update(frames, myImg, matrix, layer, cnum):
     # 定义函数的时候，形参多留一个位置给FuncAnimation里的Frames参数
     new_matrix = matrix.copy()
     rows = np.shape(matrix)[0]
     cols = np.shape(matrix)[1]
     for i in range(rows):
         for j in range(cols):
-            neighborhood = neighbor(matrix, i, j, n)
-            if (neighborhood.sum() - matrix[i, j])%4 == 0:
-                new_matrix[i, j] = 0
-            if (neighborhood.sum() - matrix[i, j])%4 == 1:
-                new_matrix[i, j] = 1
-            if (neighborhood.sum() - matrix[i, j])%4 == 2:
-                new_matrix[i, j] = 2
-            if (neighborhood.sum() - matrix[i, j])%4 == 3:
-                new_matrix[i, j] = 3
-    img.set_data(new_matrix)
+            neighborhood = neighbor(matrix, i, j, layer)
+            # if (neighborhood.sum() - matrix[i, j])%4 == 0:
+            #     new_matrix[i, j] = 0
+            # if (neighborhood.sum() - matrix[i, j])%4 == 1:
+            #     new_matrix[i, j] = 1
+            # if (neighborhood.sum() - matrix[i, j])%4 == 2:
+            #     new_matrix[i, j] = 2
+            # if (neighborhood.sum() - matrix[i, j])%4 == 3:
+            #     new_matrix[i, j] = 3
+            for m in range(0, cnum):
+                if (neighborhood.sum() - matrix[i, j]) % cnum == m:
+                    new_matrix[i, j] = m
+    myImg.set_data(new_matrix)
     matrix[:] = new_matrix[:]
-    return img,
+    return myImg,
 
 
 if __name__ == '__main__':
@@ -76,7 +79,7 @@ if __name__ == '__main__':
     plt.yticks([])
     # save_count=50，意味着保留50帧的内容
     # fargs，给update填入的后三个参数
-    ani = animation.FuncAnimation(fig, update, fargs=(img, m1, n),
+    ani = animation.FuncAnimation(fig, update, fargs=(img, m1, n, 5),
                                   interval=updateInterval, save_count=50)
 
     ani.save(filename="CA1.gif")
