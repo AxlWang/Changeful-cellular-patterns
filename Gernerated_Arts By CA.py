@@ -68,11 +68,14 @@ if __name__ == '__main__':
     # for i in range(1, 40):
     #     m1 = update(m1, 2)
     # painter(m1, "Reds")
+
+    # plt.subplots()返回两个值，一个是Figure（画布)，另一个就是Axes对象（子图）
     fig, ax = plt.subplots()
     img = ax.imshow(m1, interpolation='nearest')
     plt.xticks([])
     plt.yticks([])
     # save_count=50，意味着保留50帧的内容
+    # fargs，给update填入的后三个参数
     ani = animation.FuncAnimation(fig, update, fargs=(img, m1, n),
                                   interval=updateInterval, save_count=50)
 
