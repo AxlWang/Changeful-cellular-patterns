@@ -41,7 +41,7 @@ ani = animation.FuncAnimation(fig, update, fargs=(img, m1, n, 5),
 
 ### Processing code
 
-
+![img2](gif.gif)
 
 - EN: When I was writing Processing code, I tried to make every iteration of the pattern fill the entire canvas. For this reason, I defined a function called "copy_by_center" in the "cell" class, which requires passing in two parameters: one is the number of rows occupied by the pattern, and the other is a two-dimensional array for iteration. In the "copy_by_center" function, I also defined a function called "count_row2", which can obtain the number of rows occupied by elements with numbers in a two-dimensional array. Finally, the 'copy_by_center' function returns a two-dimensional array to the 'show' function for visualization.
 
