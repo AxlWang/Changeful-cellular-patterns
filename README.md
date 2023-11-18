@@ -83,3 +83,8 @@ ani = animation.FuncAnimation(fig, update, fargs=(img, m1, n, 5),
 - EN: In the "View" module, I used an external library called "gifAnimation" to obtain gif images. Please refer to the code for details.
 
 - CN: 在"View"这个模块中，我使用了一个名为“gifAnimation”的外部库来获取gif图片。具体可查看代码。
+
+## Areas for improvement
+
+- EN: The above two methods of generating patterns are both based on the same rule, and in fact, there are more rules waiting for me to experiment with.
+- CN: 以上两种生成图案的方式都是基于同一种规则，事实上还有更多规则等待着我去实验。
