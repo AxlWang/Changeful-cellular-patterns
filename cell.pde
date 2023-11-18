@@ -12,21 +12,17 @@ class Cell {
      return mySum;
   }
   
-  int[][] next_gen(int[][] grid){
+  int[][] next_gen(int[][] grid, int cnum){
     int[][] new_grid = new int[grid.length][grid[0].length];
     int row = grid.length;
     int col = grid[0].length;
     for (int i = 0; i < row; i++){
       for (int j = 0; j < col; j++){
         int sum_n = sum_neighbor(grid, i, j, col, row);
-        if (sum_n % 4 == 0){
-          new_grid[i][j] = 0;
-        } else if (sum_n % 4 == 1){
-          new_grid[i][j] = 1;
-        }else if (sum_n % 4 == 2) {
-          new_grid[i][j] = 2;
-        }else if (sum_n % 4 == 3) {
-          new_grid[i][j] = 3;
+        for (int k = 0; k < cnum; k++){
+          if (sum_n % cnum == k) {
+            new_grid[i][j] = k;
+          }
         }
       }
     }
@@ -92,7 +88,7 @@ class Cell {
          noStroke();
          push();
          translate((j+0.5)*width/counts,(i+0.5)*height/counts);
-         rotate(radians(angle));
+         //rotate(radians(angle));
          rectMode(CENTER);
          rect(0,0,width/counts,height/counts);
          //rect((j+0.5)*width/counts,(i+0.5)*height/counts,width/counts,height/counts);
