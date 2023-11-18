@@ -38,3 +38,48 @@ def update(frames, myImg, matrix, layer, cnum):
 ani = animation.FuncAnimation(fig, update, fargs=(img, m1, n, 5),
                                   interval=updateInterval, save_count=20)
 ```
+
+### Processing code
+
+![img2](gif.gif)
+
+- EN: When I was writing Processing code, I tried to make every iteration of the pattern fill the entire canvas. For this reason, I defined a function called "copy_by_center" in the "cell" class, which requires passing in two parameters: one is the number of rows occupied by the pattern, and the other is a two-dimensional array for iteration. In the "copy_by_center" function, I also defined a function called "count_row2", which can obtain the number of rows occupied by elements with numbers in a two-dimensional array. Finally, the 'copy_by_center' function returns a two-dimensional array to the 'show' function for visualization.
+
+- CN: 我在编写Processing代码的时候，尝试使每一次迭代出的图案都能充斥整个画布。为此，我在“cell”这个类中，定义了一个名为“copy_by_center”的函数，这个函数需要传入两个参数，一个是图案占据的行数，另一个是用于迭代的二维数组。在"copy_by_center"函数中，我还定义了一个函数名为“count_row2”，它可以获得二维数组中有数字的元素占据的行数。最后，"copy_by_center"函数返回一个二维数组给“show”函数进行可视化。
+
+```Processing
+ int count_row2(int[][] grid) {
+    int result = 0;
+    for (int i = 0; i < grid.length; i++){
+      int mycount = 0;
+      for (int j = 0; j < grid[0].length; j++){
+        mycount += grid[i][j];
+      }
+      if(mycount > 0){
+         result = (grid.length - 2*i);
+         return result;
+      }
+    }
+    return result;
+  }
+  
+  int[][] copy_by_center(int rows, int[][] grid){
+    int startrow = floor(grid.length/2) - (rows - 1)/2;
+    int startcol = floor(grid[0].length/2) - (rows - 1)/2;
+    int x = 0;
+    int[][] center_grid = new int [rows][rows];
+    for (int i = startrow; i < (startrow + rows); i++){
+      int y = 0;
+      for (int j = startcol; j < (startcol + rows); j++){
+        center_grid[x][y] = grid[i][j];
+        y++;
+      }
+      x++;
+    }
+    return center_grid;
+  }
+```
+
+- EN: In the "View" module, I used an external library called "gifAnimation" to obtain gif images. Please refer to the code for details.
+
+- CN: 在"View"这个模块中，我使用了一个名为“gifAnimation”的外部库来获取gif图片。具体可查看代码。
